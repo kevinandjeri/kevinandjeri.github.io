@@ -91,5 +91,12 @@
         <script type="text/javascript" src="js/contact_me.js"></script>
 
         <script type="text/javascript" src="js/main.js"></script>
+        <script>
+            $(document).ready(function() {
+                if ( !document.location.href.match( /#rehearsal/g ) ) {
+                    document.location.href += "#rehearsal";
+                }
+            });
+        </script>
     </body>
 </html>
