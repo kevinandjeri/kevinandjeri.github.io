@@ -266,7 +266,7 @@ hr {
 }
 /* Reception */
 #event { background: url(../img/reception.jpg); }
-#photos { background: url(../img/photos.jpg); }
+#photos { background: url(../img/photos.jpg) no-repeat center center fixed; }
 #registry { background: url(../img/registry.jpg) no-repeat bottom center fixed; }
 #rehearsal { background: url(../img/rehearsal.jpg) no-repeat bottom center fixed; }
 #photos,
