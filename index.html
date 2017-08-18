@@ -38,7 +38,7 @@
 					events,
 					function(i, x) {
 						if (i == 0) {
-							var date = $(x).attr("date");
+							var date = $(x).attr("date");alert(date);
 							date = new Date(Date.parse(date));
 
 							var countdown = getTimeDifference(date);
