@@ -41,7 +41,7 @@
 							var date = $(x).attr("date"); console.log(date);
 							date = new Date(Date.parse(date));
 
-							var countdown = getTimeDifference(date);console.log(countdown);
+							var countdown = getTimeDifference(date);
 							if (!countdown) { $(x).html(""); }
 							else {
 								var spans = $(events[i + 1]).children();
@@ -57,7 +57,7 @@
 
 			function getTimeDifference(date) {
 				var now = new Date();
-				var difference = date.getTime() - now.getTime();
+				var difference = date.getTime() - now.getTime(); console.log(difference);
 				if (difference <= 0) { return; }
 				else {
 					var seconds = Math.floor(difference / 1000);
