@@ -38,8 +38,7 @@
 					events,
 					function(i, x) {
 						if (i == 0) {
-							var date = $(x).attr("date"); console.log(date);
-							console.log(Date.parse(date));
+							var date = "2017-09-07T15:30:00";//$(x).attr("date"); 
 							date = new Date(Date.parse(date));
 
 							var countdown = getTimeDifference(date);
