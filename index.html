@@ -32,13 +32,13 @@
                 <script src = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 		<script type = "text/javascript">
 
-			function displayCountdowns() {
+			function displayCountdowns() { console.log("cheese");
 				var events = $("body").children();
 				$.each(
 					events,
 					function(i, x) {
 						if (i == 0) {
-							var date = $(x).attr("date");
+							var date = $(x).attr("date"); console.log(date);
 							date = new Date(Date.parse(date));
 
 							var countdown = getTimeDifference(date);
