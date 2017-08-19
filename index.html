@@ -32,7 +32,7 @@
                 <script src = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 		<script type = "text/javascript">
 
-			function displayCountdowns() { console.log("cheese");
+			function displayCountdowns() { 
 				var events = $("body").children();
 				$.each(
 					events,
@@ -41,7 +41,7 @@
 							var date = $(x).attr("date"); console.log(date);
 							date = new Date(Date.parse(date));
 
-							var countdown = getTimeDifference(date);
+							var countdown = getTimeDifference(date);console.log(countdown);
 							if (!countdown) { $(x).html(""); }
 							else {
 								var spans = $(events[i + 1]).children();
