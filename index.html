@@ -38,7 +38,7 @@
 					events,
 					function(i, x) {
 						if (i == 0) {
-							var date = "Thu Sep 07 2017 15:30:00 GMT-0400 (EDT)";//$(x).attr("date"); 
+							var date = $(x).attr("date"); 
 							date = new Date(Date.parse(date));
 
 							var countdown = getTimeDifference(date);
@@ -85,9 +85,9 @@
  
  	</head>
   	<body align = "center">
-		 <div class = "row" date = "2017-09-07 15:30:00">
+		 <div class = "row" date = "Thu Sep 07 2017 15:30:00 GMT-0400 (EDT)">
 			<h2>Sawyer!!!</h2>
-			2017-09-07 3:30 p.m.
+			Thu Sep 07 2017 15:30:00 GMT-0400 (EDT)
 		</div>
                 <div class = "timer row">
                         <span>...</span>days
