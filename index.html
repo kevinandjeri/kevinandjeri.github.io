@@ -1,5 +1,5 @@
 
-<!DOCTYPE html>
+<DOCTYPE html>
 <html lang = "en">
 	<head>
 		<meta charset = "utf-8">
@@ -41,26 +41,24 @@
 		<script type = "text/javascript">
 
 			function displayCountdowns() { 
-				var events = $("body").children();
-				$.each(
-					events,
-					function(i, x) {
-						if (i == 0) {
-							var date = $(x).attr("date"); 
-							date = new Date(Date.parse(date));
+				var date = $( "#babyDueDate" ).attr("date"); 
+				date = new Date(Date.parse(date));
 
-							var countdown = getTimeDifference(date);
-							if (!countdown) { $(x).html(""); }
-							else {
-								var spans = $(events[i + 1]).children();
-								$(spans[0]).html(countdown.days);
-								$(spans[1]).html(countdown.hours);
-								$(spans[2]).html(countdown.minutes);
-								$(spans[3]).html(countdown.seconds);
-							}
-						}
-					}
-				);
+				var countdown = getTimeDifference(date);
+				if (!countdown) { $( "#babyTimer"  ).html(""); }
+				else {
+					var spans = $( "#babyTimer" ).children();
+					$(spans[0]).html(countdown.days);
+					$(spans[1]).html(countdown.hours);
+					$(spans[2]).html(countdown.minutes);
+					$(spans[3]).html(countdown.seconds);
+				}
+
+				var now = new Date();
+				var dueDate = new Date( Date.parse("Thu Sep 07 2017 08:30:00 GMT-0400 (EDT)") );
+				var difference = dueDate.getTime() - now.getTime();
+				var shots = 2 * Math.floor( difference / 1000 / 60 / 60 / 24 );
+				$( "#shots" ).html(shots);
 			}
 
 			function getTimeDifference(date) { 
@@ -93,16 +91,26 @@
  
  	</head>
   	<body align = "center">
-		 <div class = "row" date = "Thu Sep 07 2017 15:30:00 GMT-0400 (EDT)">
+		 <div class = "row" date = "Thu Sep 07 2017 15:30:00 GMT-0400 (EDT)" id = "babyDueDate">
 			<h2>Sawyer!!!</h2>
 			2017-09-07 3:30p.m. (EDT)
 		</div>
-                <div class = "timer row">
+                <div class = "timer row" id = "babyTimer">
                         <span>...</span>days
                         <span>...</span>hr.
                         <span>...</span>min.
                         <span>...</span>sec.
                 </div>
+
+		<div class = "row">
+                        <h2>Heparin Shots!!!</h2>
+                </div>
+		<div class = "timer row">
+			<span id = "shots"></span>
+			
+		</div>
   	</body>
 </html>
+
+
 
