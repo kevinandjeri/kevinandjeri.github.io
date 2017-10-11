@@ -1,0 +1,207 @@
+<html>
+	<head>
+		<style type = "text/css">
+			body {
+				-webkit-columns: 3 300px;
+				-moz-columns: 3 300px;
+				columns: 3 300px;
+			}
+		</style>
+		<script src = "https://code.jquery.com/jquery-3.2.1.min.js" integrity = "sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin = "anonymous"></script>
+		<script type = "text/javascript">
+			var json = [
+				{
+					"title": "Personal Packing Checklist!",
+					"sections": [
+						{
+							"title": "Medications & Toiletries",
+							"items": [
+								"Medication Case + Lovenox",
+								"Mederma Scar Cream",
+								"Tums / Zofran / Xanax",
+								"Pantiliners / Tampons / Pads",
+								"Chapstick",
+								"Straightener / Curling Iron",
+								"Hair dryer",
+								"Cibu Sticky Rice",
+								"Bobby pins",
+								"Hair Ties",
+								"Hairspray",
+								"Brush",
+								"Comb",
+								"Makeup remover wipes",
+								"Face wash",
+								"Face Lotion",
+								"Perfume",
+								"Deodorant",
+								"Body lotion",
+								"Sunblock",
+								"Shampoo",
+								"Conditioner",
+								"Heat protectant hair balm",
+								"Body wash",
+								"Razor",
+								"Makeup bag",
+								"Toothbrush in case",
+								"Toothpaste / Floss"
+							]
+						},
+						{
+							"title": "Eye / Nail Care",
+							"items": [
+								"Sunglasses",
+								"Glasses and glasses case",
+								"Contacts",
+								"Nail File / Clippers if applicable"
+							]
+						},
+						{
+							"title": "Clothing and Accessories",
+							"items": [
+								"Lint roller",
+								"Jewelry",
+								"Shoes / Sandals / Running Shoes",
+								"PJ Pants, PJ tops",
+								"Underwear – regular and thong",
+								"Socks",
+								"Bras – regular, strapless, sports",
+								"Outfits – casual",
+								"Workout clothes",
+								"Swimsuit and Coverup"
+							]
+						},
+						{
+							"title": "Electronics & Carry On Bag",
+							"items": [
+								"Wallet and Keys with Identification",
+								"Cell and Charger",
+								"Bose Headphones"
+							]
+						}
+					]
+				},
+				{
+					"title": "Baby Packing Checklist - 0 to 4 months!",
+					"sections": [
+						{
+							"title": "Diapering and Changing",
+							"items": [
+								"Fully loaded diaper bag for car (refer to other checklist!)",
+								"Diapers (plan 10 for each day)",
+								"Wipes (plan for large pack each trip)",
+								"Diaper Cream (from Diaper bag, striped jar)",
+								"Changing pad clutch",
+								"Wet Bags x 2 for wet laundry and dry clothes transportation",
+								{
+									"title": "Outfits (plan 2 for each day)",
+									"items": [
+										"Onesies",
+										"Pants",
+										"Socks / Booties"
+									]
+								},
+								"Blankets (take all of them!)",
+								"Swaddle Sacks (take all clean ones!)",
+								"Puppy Pads (plan 2 for each day)"
+							]
+						},
+						{
+							"title": "Feeding and Soothing",
+							"items": [
+								"Burp cloths (take all of the clean ones!)",
+								"Bibs (take all of the clean ones!)",
+								"Pacifiers with wipes (from diaper bag)",
+								"Formula (take large jar with enough for 8 bottles / day)",
+								{
+									"title": "Bottles (take all 8 bottles)",
+									"items": [
+										"Caps",
+										"Collars",
+										"Nipples",
+										"Bottle cleaning brush + nipple brush"
+									]
+								}
+							]
+						},
+						{
+							"title": "Sleeping",
+							"items": [
+								"Infant Sleeper or Pack n Play",
+								"Boppy Lounger"
+							]
+						},
+						{
+							"title": "Transportation",
+							"items": [
+								"Baby Bjorn or Solly Wrap",
+								"Stroller if indicated / needed for longer trips with multiple outings"
+							]
+						}
+					]
+				}
+			];
+
+			$( document ).ready( function() {
+				$.each(
+					json,
+					function( index, value ) {
+						$( "body" ).append("<h2>" + value.title + "</h2>");
+
+						$.each(
+							value.sections,
+							function( index, value ) {
+								$( "body" ).append("<b><u>" + value.title + "</b></u><br>");
+
+								$.each(
+									value.items,
+									function( index, item ) {
+										if ( typeof item == "object" ) {
+											var titleCheckbox = createCheckbox( item.title );
+											$( "body" ).append( titleCheckbox );
+
+											$.each(
+												item.items,
+												function( index, item ) {
+													var checkbox = createCheckbox( item );
+													$( "body" ).append( "&nbsp;&nbsp;&nbsp;" );
+													$( "body" ).append( checkbox );
+												}
+											);
+										}
+										else {
+											var checkbox = createCheckbox( item );
+											$( "body" ).append( checkbox );
+										}
+									}
+								);
+							}
+						);
+					}
+				);
+			});
+
+			function createCheckbox( item ) {
+				var random = Math.random().toString().replace( /0[.]/g, "" );
+
+				var span = document.createElement( "span" );
+
+				var input = document.createElement( "input" );
+				input.id = random;
+				input.type = "checkbox";
+				$( span ).append( input );
+
+				var label = document.createElement( "label" );
+				label.setAttribute( "for", random );
+				label.innerHTML = item;
+				$( span ).append( label );
+
+				var lineBreak = document.createElement( "br" );
+				$( span ).append( lineBreak );
+
+				return span;
+			}
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
