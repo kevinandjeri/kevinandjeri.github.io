@@ -1,24 +1,10 @@
+
 <html>
 	<head>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-		<style type = "text/css">
-			#div {
-				-webkit-columns: 3 300px;
-				-moz-columns: 3 300px;
-				columns: 3 300px;
-			}
-			@media only screen and (max-width: 629px) {
-  /* for widths less than or equal to 629 pixels */
-  #div {
-				-webkit-columns: 1 100%;
-				-moz-columns: 1 100%;
-				columns: 1 100%;
-			}
-}
-		</style>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
 		<script type = "text/javascript">
 			var json = [
 				{
@@ -153,35 +139,44 @@
 			];
 
 			$( document ).ready( function() {
+				for ( var i = 0; i < json.length; i++ ) {
+					var div = document.createElement( "div" );
+					var columns = parseInt( 12 / json.length );
+					div.className = "col-md-" + columns;
+					div.id = "column" + i;
+					$( ".row" ).append( div );
+				}
+
 				$.each(
 					json,
 					function( index, value ) {
-						$( "#div" ).append("<h2>" + value.title + "</h2>");
+						var columnDiv = $( "#column" + index );
+						columnDiv.append( "<h2>" + value.title + "</h2>" );
 
 						$.each(
 							value.sections,
 							function( index, value ) {
-								$( "#div" ).append("<b><u>" + value.title + "</b></u><br>");
+								columnDiv.append("<b><u>" + value.title + "</b></u><br>");
 
 								$.each(
 									value.items,
 									function( index, item ) {
 										if ( typeof item == "object" ) {
 											var titleCheckbox = createCheckbox( item.title );
-											$( "#div" ).append( titleCheckbox );
+											columnDiv.append( titleCheckbox );
 
 											$.each(
 												item.items,
 												function( index, item ) {
 													var checkbox = createCheckbox( item );
-													$( "#div" ).append( "&nbsp;&nbsp;&nbsp;" );
-													$( "#div" ).append( checkbox );
+													columnDiv.append( "&nbsp;&nbsp;&nbsp;" );
+													columnDiv.append( checkbox );
 												}
 											);
 										}
 										else {
 											var checkbox = createCheckbox( item );
-											$( "#div" ).append( checkbox );
+											columnDiv.append( checkbox );
 										}
 									}
 								);
@@ -214,6 +209,8 @@
 		</script>
 	</head>
 	<body>
-		<div class = "container-fluid" id = "div"></div>
+		<div class = "container-fluid">
+			<div class = "row"></div>
+		</div>
 	</body>
 </html>
