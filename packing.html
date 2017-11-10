@@ -1,6 +1,11 @@
-
+<!DOCTYPE html>
 <html>
 	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale = 1">
+		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
@@ -138,11 +143,16 @@
 				}
 			];
 
+			var counter = 0;
 			$( document ).ready( function() {
+				if ( !document.cookie ) {
+					document.cookie = "items=item0;expires=Wed, 01 Jan 2020 00:00:00 GMT;";
+				}
+
 				for ( var i = 0; i < json.length; i++ ) {
 					var div = document.createElement( "div" );
 					var columns = parseInt( 12 / json.length );
-					div.className = "col-md-" + columns;
+					div.className = "col-sm-" + columns;
 					div.id = "column" + i;
 					$( ".row" ).append( div );
 				}
@@ -187,17 +197,38 @@
 			});
 
 			function createCheckbox( item ) {
-				var random = Math.random().toString().replace( /0[.]/g, "" );
+				counter++;
 
 				var span = document.createElement( "span" );
 
 				var input = document.createElement( "input" );
-				input.id = random;
+
+				input.id = "item" + counter;
 				input.type = "checkbox";
+				var items = document.cookie.split( ";" )[ 0 ].split( "=" )[ 1 ].split( "," );
+				var index = items.indexOf( input.id );
+				if ( index > -1 ) {
+					input.checked = "checked";
+				}
+
+				$( input ).click( function() {
+					var items = document.cookie.split( ";" )[ 0 ].split( "=" )[ 1 ].split( "," );
+					if ( $( this ).is( ":checked" ) ) {
+						items.push( input.id );
+					}
+					else {
+						var index = items.indexOf( input.id );
+						if ( index > -1 ) {
+							items.splice( index, 1 );
+						}
+					}
+					document.cookie = "items=" + items.join( "," ) + ";expires=Wed, 01 Jan 2020 00:00:00 GMT;";
+				});
+
 				$( span ).append( input );
 
 				var label = document.createElement( "label" );
-				label.setAttribute( "for", random );
+				label.setAttribute( "for", "item" + counter );
 				label.innerHTML = item;
 				$( span ).append( label );
 
@@ -206,10 +237,16 @@
 
 				return span;
 			}
+
+			function refresh() {
+				document.cookie = "items=item0;expires=Wed, 01 Jan 2020 00:00:00 GMT;";
+				location.reload();
+			}
 		</script>
 	</head>
 	<body>
 		<div class = "container-fluid">
+			<button class = "btn btn-primary form-control" onclick = refresh()>Refresh</button>
 			<div class = "row"></div>
 		</div>
 	</body>
