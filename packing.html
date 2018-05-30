@@ -237,13 +237,14 @@
 					var items = document.cookie.split( ";" )[ 0 ].split( "=" )[ 1 ].split( "," );
 					if ( $( this ).is( ":checked" ) ) {
 						items.push( input.id );
-						$( label ).css( "text-decoration", "line-trhough" );
+						//$( label ).css( "text-decoration", "line-trhough" );
+						$(this).next().css( "text-decoration", "line-trhough" );
 					}
 					else {
 						var index = items.indexOf( input.id );
 						if ( index > -1 ) {
 							items.splice( index, 1 );
-							$( label ).css( "text-decoration", "none" );
+							$(this).next().css( "text-decoration", "none" );
 						}
 					}
 					document.cookie = "items=" + items.join( "," ) + ";expires=Wed, 01 Jan 2020 00:00:00 GMT;";
