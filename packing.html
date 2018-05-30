@@ -232,11 +232,6 @@
 				if ( index > -1 ) {
 					input.checked = "checked";
 				}
-
-				var label = document.createElement( "label" );
-				label.className = "strikethrough";
-				label.setAttribute( "for", "item" + counter );
-				label.innerHTML = item;
 				
 				$( input ).click( function() {
 					var items = document.cookie.split( ";" )[ 0 ].split( "=" )[ 1 ].split( "," );
@@ -254,6 +249,10 @@
 
 				$( span ).append( input );
 
+				var label = document.createElement( "label" );
+				label.className = "strikethrough";
+				label.setAttribute( "for", "item" + counter );
+				label.innerHTML = item;
 				$( span ).append( label );
 
 				var lineBreak = document.createElement( "br" );
