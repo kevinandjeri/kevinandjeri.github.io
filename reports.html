@@ -6,12 +6,43 @@
 		<meta name = "viewport" content = "width=device-width, initial-scale = 1">
 		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
+		<script src="https://cdn.jsdelivr.net/gh/gitbrent/pptxgenjs@2.5.0/dist/pptxgen.bundle.js"></script>
 		<title>Report PPT Generator</title>
 
 	</head>
 	<body>
-		<div class = "container-fluid">
+		<input type = "file" id = "files" name = "files[]" multiple />
+		<output id = "list"></output>
+		<script type = "text/javascript">
+			$( document ).ready( function() {
+				if ( window.File && window.FileReader && window.FileList && window.Blob ) {
+					// Great success! All the File APIs are supported.
+				} else {
+					alert( 'The File APIs are not fully supported in this browser.' );
+				}
+			} );
+			
+			function handleFileSelect( evt ) {
+				var files = evt.target.files; // FileList object
+				// files is a FileList of File objects. List some properties.
+				var output = [];
+				for ( var i = 0, f; f = files[ i ]; i++ ) {
+					output.push( 
+						'<li><strong>', 
+						escape(f.name), 
+						'</strong> (', 
+						f.type || 'n/a',
+						') - ',
+						f.size, 
+						' bytes, last modified: ',
+						f.lastModifiedDate ? f.lastModifiedDate.toLocaleDateString() : 'n/a',
+						'</li>'
+					);
+				}
+				document.getElementById('list').innerHTML = '<ul>' + output.join('') + '</ul>';
+			}
 
-		</div>
+			document.getElementById( 'files' ).addEventListener( 'change', handleFileSelect, false );
+		</script>
 	</body>
 </html>
