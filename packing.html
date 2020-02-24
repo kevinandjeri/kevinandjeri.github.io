@@ -217,14 +217,14 @@
 
 				input.id = "item" + counter;
 				input.type = "checkbox";
-				var items = document.cookie ? document.cookie.split( ";" )[ 0 ].split( "=" )[ 1 ].split( "," ) : [];
+				var items = document.cookie.split( ";" )[ 0 ].split( "=" )[ 1 ].split( "," );
 				var index = items.indexOf( input.id );
 				if ( index > -1 ) {
 					input.checked = "checked";
 				}
 				
 				$( input ).click( function() {
-					var items = document.cookie ? document.cookie.split( ";" )[ 0 ].split( "=" )[ 1 ].split( "," ) : [];
+					var items = document.cookie.split( ";" )[ 0 ].split( "=" )[ 1 ].split( "," );
 					if ( $( this ).is( ":checked" ) ) {
 						items.push( input.id );
 					}
